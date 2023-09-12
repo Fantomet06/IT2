@@ -44,8 +44,6 @@ print(f"Summen av terningkastene er {sum_result}")
 print(f"Gjennomsnittet av terningkastene er {avg_result}")
 
 #D
-import random
-
 def roll_two_dice(n):
     rolls = [(random.randint(1, 6), random.randint(1, 6)) for _ in range(n)]
     total_sum = sum([sum(roll) for roll in rolls])
