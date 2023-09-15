@@ -14,7 +14,7 @@ if overlapp_intervall(int(a),int(b),int(c),int(d)): print("\nIntervallene overla
 else: print("\nIntervallene overlapper ikke")
 """
 
-def check_overlap(x_1, y_1, x_2, y_2, x_3, y_3, x_4, y_4) -> bool:
+def overlapp_rektangler(x_1: int, y_1: int, x_2: int, y_2: int, x_3: int, y_3: int, x_4: int, y_4: int) -> bool:
     if x_3 > x_1 and y_3 > y_1 and x_4 < x_2 and y_4 < y_2:
         return False
 
@@ -31,7 +31,7 @@ def main():
         [4, 8, 2, 6],
         [1, 3, 4, 5]
     ]
-    print("Test cases for intervaller: \n")  
+    print("\nTest cases for intervaller: \n")  
     for i in test_cases:
         print(overlapp_intervall(i[0], i[1], i[2], i[3]))
 
@@ -44,7 +44,7 @@ def main():
     ]
     print("\nTest cases for overlapping av rektangler: \n")  
     for i in check:
-        print(check_overlap(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
+        print(overlapp_rektangler(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
 
 if __name__ == "__main__":
     main()
