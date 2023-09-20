@@ -1,4 +1,18 @@
-def overlapp_intervall(a: int, b: int, c: int, d: int) -> bool:
+def overlap_interval(a: int, b: int, c: int, d: int) -> bool:
+    """
+    Check if two intervals overlap.
+
+    Parameters:
+    ----------
+    a (int): start of first interval
+    b (int): end of first interval
+    c (int): start of second interval
+    d (int): end of second interval
+
+    Return:
+    -------
+    (bool): True if overlap, False if not.
+    """
     if a < c and b <= c:
         return False
     elif d <= a and b > d:
@@ -6,15 +20,28 @@ def overlapp_intervall(a: int, b: int, c: int, d: int) -> bool:
     else:
         return True
 
+def overlap_rectangles(x_1: int, y_1: int, x_2: int, y_2: int, x_3: int, y_3: int, x_4: int, y_4: int) -> bool:
+    """
+    Check if two rectangles overlap.
+    
+    Parameters:
+    ----------
+    First rectangle:
+        x_1 (int): bottom left corner x-coordinate
+        y_1 (int): bottom left corner y-coordinate
+        x_2 (int): top right corner x-coordinate
+        x_2 (int): top right corner y-coordinate
 
-"""
-a,b= input("Skriv inn intervall 1: ").split()
-c,d= input("Skriv inn intervall 2: ").split()
-if overlapp_intervall(int(a),int(b),int(c),int(d)): print("\nIntervallene overlapper") 
-else: print("\nIntervallene overlapper ikke")
-"""
+    Second rectangle:
+        x_3 (int): bottom left corner x-coordinate
+        y_3 (int): bottom left corner y-coordinate
+        x_4 (int): top right corner x-coordinate
+        x_4 (int): top right corner y-coordinate
 
-def overlapp_rektangler(x_1: int, y_1: int, x_2: int, y_2: int, x_3: int, y_3: int, x_4: int, y_4: int) -> bool:
+    Return:
+    -------
+    (bool): True if overlap, False if not.
+    """
     if x_3 > x_1 and y_3 > y_1 and x_4 < x_2 and y_4 < y_2:
         return False
 
@@ -24,7 +51,14 @@ def overlapp_rektangler(x_1: int, y_1: int, x_2: int, y_2: int, x_3: int, y_3: i
         return True
 
 def main():
+    """
+    Function for testing the functions in this file.
 
+    First check: overlapp_intervall
+    Second check: overlapp_rektangler
+    """
+
+    """First check: overlap_interval"""
     test_cases= [
         [1, 5, 3, 8],
         [1, 5, 2, 4],
@@ -33,8 +67,9 @@ def main():
     ]
     print("\nTest cases for intervaller: \n")  
     for i in test_cases:
-        print(overlapp_intervall(i[0], i[1], i[2], i[3]))
+        print(overlap_interval(i[0], i[1], i[2], i[3]))
 
+    """Second check: overlap_rectangles"""
     check = [
         [1, 1, 8, 6, 7, 5, 10, 9],
         [1, 1, 8, 6, 3, 0, 5, 9],
@@ -44,7 +79,7 @@ def main():
     ]
     print("\nTest cases for overlapping av rektangler: \n")  
     for i in check:
-        print(overlapp_rektangler(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
+        print(overlap_rectangles(i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7]))
 
 if __name__ == "__main__":
     main()
