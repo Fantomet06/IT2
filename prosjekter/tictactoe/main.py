@@ -29,8 +29,9 @@ def main():
     clock = pygame.time.Clock()
 
     # -- Objects --
-    square_1 = handler.Square(0, 0, 200, 200, RED)
-    square_2 = handler.Square(200, 0, 200, 200, BLUE)
+  #  square_1 = handler.Square(0, 0, 200, 200, RED)
+ #   square_2 = handler.Square(200, 0, 200, 200, BLUE)
+#    square_3 = handler.Square(400, 0, 200, 200, RED)
 
     frame = 0
     while run:
@@ -49,9 +50,13 @@ def main():
 
 
         mouse = pygame.mouse.get_pos()
-      
-        square_1.draw(WIN)
-        square_2.draw(WIN)
+
+        bg = pygame.image.load("./prosjekter/tictactoe/media/grid.png")
+        WIN.blit(bg, (0, 0)) #TODO: change size of image
+        # drawing button on screen
+        #square_1.draw(WIN)
+        #square_2.draw(WIN)
+        #square_3.draw(WIN)
 
         # if mouse is hovered on a button it
         # changes to lighter shade 
