@@ -1,0 +1,21 @@
+@startuml
+
+class Spiller {
+    -posisjon 
+}
+
+class Trener {
+    -spesialisering
+}
+
+class Lag {
+}
+
+class Klubb {
+}
+
+Spiller -> Lag
+Lag -> Klubb
+Trener -> Klubb
+
+@enduml
