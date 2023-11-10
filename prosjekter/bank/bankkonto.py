@@ -16,6 +16,7 @@ class bank:
                 Kontonummer: {self.kontonummer}
                 Saldo: {self.saldo}
               """)
+
     def setteInn(self, x):
         self.saldo += x
     
@@ -24,21 +25,33 @@ class bank:
 
 # -- BSU --
 class BSU(bank):
+    """
+    Klasse som arver fra bank, sørger for at BSU kontoer har maks innskudd
+    """
     def __init__(self, fornavn: str, etternavn: str, maksInnskudd: int, saldo: int):
         super().__init__(fornavn, etternavn, saldo)
         self.maksInnskudd = maksInnskudd
     
-    def innskudd(self, x):
+    def innskudd(self, x): # x er hvor mye som skal settes inn
         if x > self.maksInnskudd: x = self.maksInnskudd
         self.setteInn(x)
 
+    """
+    def setteInn(self, x):
+        if x > self.maksInnskudd: x = self.maksInnskudd
+        self.saldo += x
+    """
+
 # -- SPAREKONTO --
 class Sparekonto(bank):
+    """
+    Klasse som arver fra bank, sørger for at sparekontoer har maks uttak
+    """
     def __init__(self, fornavn: str, etternavn: str, maksUttak: int, saldo: int):
         super().__init__(fornavn, etternavn, saldo)
         self.maksUttak = maksUttak
 
-    def uttak(self, x):
+    def uttak(self, x): # x er hvor mye som skal tas ut
         if x > self.maksUttak: x = self.maksUttak
         self.taUt(x)
 
@@ -77,7 +90,6 @@ def nyKonto(kontoer):
         kontoer[nyKonto.kontonummer] = nyKonto
     
     print(nyKonto)
-
     return kontoer
 
 def main():
@@ -95,7 +107,6 @@ def main():
         # -- NY KONTO --
         if valg == 1:
             kontoer = nyKonto(kontoer)
-
             if (len(input("Skriv inn noe for å fortsette: ")) > 0): continue
 
         # -- SE KONTO --
