@@ -1,0 +1,43 @@
+@startuml
+class Eier {
+    +fornavn: str
+    +etternavn: str
+    +adresse: str
+    +osv.
+}
+
+class Aksjesparekonto {
+    +saldo: float
+    +kontonummer: int
+    +etternavn: str
+    +aksjer: list
+    +kjopAksje(aksje: Aksje, antall: int): None
+    +selgAksje(aksje: Aksje, antall: int): None
+}
+
+class Konto {
+    +eier: etternavn
+    +saldo: float
+    +kontonummer: int
+
+    +__str__(): str
+    +uttak(belop: float): None
+    +innskudd(belop: float): None
+}
+
+class BSU {
+    +maksInnskudd: int
+    +innskudd(belop: float): None
+}
+
+class Sparekonto {
+    +maksUttak: float
+    +uttak(belop: float): None
+}
+
+Konto <|-- BSU
+Konto <|-- Sparekonto
+Eier *-- Konto
+Eier *-- Aksjesparekonto
+
+@enduml

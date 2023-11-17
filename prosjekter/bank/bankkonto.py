@@ -55,6 +55,8 @@ class Sparekonto(bank):
         if x > self.maksUttak: x = self.maksUttak
         self.taUt(x)
 
+
+
 def _intInput(out: str, valid: list) -> int:
     while True:
         try:
@@ -67,7 +69,7 @@ def _intInput(out: str, valid: list) -> int:
         except: print("Skriv inn noe gyldig!")
 
 def nyKonto(kontoer):
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear') #clear terminal
     type = _intInput("""
                     Hva slags konto?
                     1: BSU
@@ -86,7 +88,7 @@ def nyKonto(kontoer):
         etternavn = input("Etternavn: ")
         maksUttak = _intInput("Maks Uttak: ")
         startSaldo = _intInput("Startsaldo: ")
-        nyKonto = BSU(fornavn, etternavn, maksUttak, startSaldo)
+        nyKonto = Sparekonto(fornavn, etternavn, maksUttak, startSaldo)
         kontoer[nyKonto.kontonummer] = nyKonto
     
     print(nyKonto)
@@ -94,8 +96,10 @@ def nyKonto(kontoer):
 
 def main():
     kontoer = {"123": BSU("adi", "bardari", 100, 10)}
+    assert kontoer["123"].saldo == 10, "Feil ved opprettelse"
+
     while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
+        os.system('cls' if os.name == 'nt' else 'clear') #clear terminal
         valg = _intInput("""
                             Hva vil du gjøre?
                             1: Legge til ny konto
@@ -112,7 +116,7 @@ def main():
         # -- SE KONTO --
         if valg == 2:
             try:
-                os.system('cls' if os.name == 'nt' else 'clear')
+                os.system('cls' if os.name == 'nt' else 'clear') #clear terminal
                 konto = _intInput("Kontonummer: ", [])
                 print(kontoer[konto])
             except: print("Fant ikke konto.")

@@ -1,0 +1,31 @@
+@startuml
+class Eier {
+    +fornavn: str
+    +etternavn: str
+    +adresse: str
+    +osv.
+}
+class Konto {
+    +saldo: float
+    +kontonummer: int
+
+    +__str__(): str
+    +uttak(belop: float): None
+    +innskudd(belop: float): None
+}
+
+class BSU {
+    +maksInnskudd: int
+    +innskudd(belop: float): None
+}
+
+class Sparekonto {
+    +maksUttak: float
+    +uttak(belop: float): None
+}
+
+Konto <|-- BSU
+Konto <|-- Sparekonto
+Eier *-- Konto
+
+@enduml
