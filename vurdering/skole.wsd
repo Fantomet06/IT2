@@ -21,7 +21,8 @@ class Lærer {
 
 Person <|-- Elev
 Person <|-- Lærer
-Person --* Klasse
+Lærer *-- Klasse
+Elev *-- Klasse
 
 class Klasse {
     +klassenavn: str
