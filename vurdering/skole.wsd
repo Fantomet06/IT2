@@ -1,0 +1,35 @@
+@startuml
+
+class Person{
+    +fornavn: str
+    +etternavn: str
+    +fødselsår: int
+    +visInfo()
+    +beregnAlder()
+    +visInfo()
+}
+
+class Elev {
+    +finnTrinn()
+    +visInfo()
+}
+
+class Lærer {
+    +sjekkFag()
+    +visInfo()
+}
+
+Person <|-- Elev
+Person <|-- Lærer
+Person --* Klasse
+
+class Klasse {
+    +klassenavn: str
+    +elever: list 
+    +leggTilKontaktlærer()
+    +leggtilElev()
+    +visElever()
+    +visInfo()
+}
+
+@enduml
