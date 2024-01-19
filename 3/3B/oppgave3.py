@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import csv
-print("\n")
 
 with open("./3/3B/boliger.csv", encoding="utf-8-sig", mode="r") as f:
     statistikk = csv.reader(f, delimiter=";") 
