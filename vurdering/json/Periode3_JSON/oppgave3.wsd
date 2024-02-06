@@ -1,0 +1,19 @@
+@startuml
+class ToDoList {
+    +todos: list
+    
+    +add(todo: Todo)
+    +filter()
+}
+
+class Todo {
+    +owner: id
+    +id: int
+    +title: str
+    +completed: bool
+    +estimat: int
+}
+
+ToDoList "1" --* Todo : inneholder
+
+@enduml
