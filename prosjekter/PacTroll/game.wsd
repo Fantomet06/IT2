@@ -1,0 +1,27 @@
+@startuml
+
+class Spill {
+    -spillere
+    -mat
+    +start()
+    +leggTilMat()
+    +fjernMat()
+}
+
+class Spiller {
+    -posisjon 
+}
+
+class Mat {
+    -posisjon
+}
+
+class Hinder {
+    -posisjon
+}
+
+Spiller -* Spill
+Mat -* Spill
+Hinder --|> Mat
+
+@enduml
