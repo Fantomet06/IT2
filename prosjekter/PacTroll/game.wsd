@@ -1,27 +1,28 @@
 @startuml
 
 class Spill {
-    -spillere
-    -mat
-    +start()
+    -spiller: spriteGroupSingle 
+    -mat: spriteGroup 
+    +kjør()
     +leggTilMat()
     +fjernMat()
+    +oppdater()
+    +tegne()
+    +sjekkKollisjon()
 }
 
 class Spiller {
-    -posisjon 
+    -posisjon: tuple
+    -hastighet: int
+    +beveg()
 }
 
 class Mat {
-    -posisjon
+    -posisjon: tuple
+    -spriteGroup: spriteGroup
 }
 
-class Hinder {
-    -posisjon
-}
-
-Spiller -* Spill
-Mat -* Spill
-Hinder --|> Mat
+Spill "1" *-- Spiller
+Spill "1" *-- Mat
 
 @enduml

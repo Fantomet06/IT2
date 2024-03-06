@@ -1,8 +1,4 @@
 import pygame
-import sys
-
-# No pycache!!
-sys.dont_write_bytecode = True
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, spriteGroup) -> None:
@@ -18,10 +14,18 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         key = pygame.key.get_pressed()
-        movement = {pygame.K_w: (0, -self.speed), pygame.K_s: (0, self.speed), pygame.K_a: (-self.speed, 0), pygame.K_d: (self.speed, 0)}
-        for k in movement:
-            if key[k]: 
-                self.vel = movement[k]
+
+        if key[pygame.K_w] or key[pygame.K_UP]:
+            self.vel = (0, -self.speed)
+        
+        if key[pygame.K_s] or key[pygame.K_DOWN]:
+            self.vel = (0, self.speed)
+        
+        if key[pygame.K_a] or key[pygame.K_LEFT]:
+            self.vel = (-self.speed, 0)
+        
+        if key[pygame.K_d] or key[pygame.K_RIGHT]:
+            self.vel = (self.speed, 0)
 
         self.pos[0] += self.vel[0]
         self.pos[1] += self.vel[1]
