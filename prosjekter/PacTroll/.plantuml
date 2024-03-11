@@ -3,6 +3,7 @@
 class Spill {
     -spiller: spriteGroupSingle 
     -mat: spriteGroup 
+    -hinder: spriteGroup
     +kjør()
     +leggTilMat()
     +fjernMat()
@@ -19,7 +20,7 @@ class Spiller {
 
 class Mat {
     -posisjon: tuple
-    -spriteGroup: spriteGroup
+    -farge: tuple
 }
 
 Spill "1" *-- Spiller

@@ -10,9 +10,9 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface((30, 30))
         self.image.fill((0, 255, 0))
         self.rect = self.image.get_rect(topleft=self.pos)
-        #self.rect = pygame.Rect(self.pos[0], self.pos[1], 30, 30)
 
     def update(self):
+        """oppdatering av posisjon hver tick"""
         key = pygame.key.get_pressed()
 
         if key[pygame.K_w] or key[pygame.K_UP]:

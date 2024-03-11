@@ -12,7 +12,6 @@ class Game:
     """Selve spill-klassen. """
     def __init__(self):
         # pygame setup
-        sys.dont_write_bytecode = True
         pygame.init()
         pygame.font.init()
 
@@ -46,17 +45,16 @@ class Game:
         self.spawn_food()
 
     def spawn_food(self):
+        """lag ny mat"""
         while True: # Lag ny mat og sjekk om den kolliderer med noe på brettet, hvis ja, ødelegg og lag ny
             new_food = Food((randint(0, WIDTH - TILE_SIZE), randint(0, HEIGHT - TILE_SIZE)), (TILE_SIZE, TILE_SIZE), (self.food))
-            if not pygame.sprite.spritecollide(new_food, self.obstacles, False) \
-            and pygame.sprite.spritecollide(new_food, self.food, False): 
-                break
-            else: 
+            if len(pygame.sprite.spritecollide(new_food, self.obstacles, False)) > 0 or len(pygame.sprite.spritecollide(new_food, self.food, False)) > 1: 
                 new_food.kill()
-
-            
+            else:
+                break
 
     def kill_food(self, food: pygame.sprite.GroupSingle):
+        """Fjern mat fra brettet"""
         food.add(self.obstacles)
         food.remove(self.food)
         food.image.fill(GREY)
@@ -91,13 +89,13 @@ class Game:
         """Start udødelighet"""
         self.invulnerable = True
         start_ticks=pygame.time.get_ticks()
-        self.invulnerable_time = start_ticks
+        self.invulnerable_clock = (start_ticks)/1000
 
     def check_invulnerable(self):
         """Sjekk tid igjen på udødelighet"""
         start_ticks = self.invulnerable_clock
         seconds=(pygame.time.get_ticks()-start_ticks)/1000
-        if seconds > self.invulnerable_time:
+        if seconds > self.invulnerable_clock+self.invulnerable_time:
             self.invulnerable = False
 
     def update(self):
@@ -108,9 +106,9 @@ class Game:
         # unnecessary check if not invulnerable
         if self.invulnerable: 
             self.check_invulnerable()
-        #print(self.points)
 
     def draw(self):
+        """kun tegning"""
         self.win.fill(BLACK)
         self.obstacles.draw(self.win)
         self.food.draw(self.win)
@@ -127,6 +125,7 @@ class Game:
         pygame.display.update()
 
     def run(self):
+        """game loop"""
         run = True
         while run:
             self.clock.tick(TICK_RATE)
