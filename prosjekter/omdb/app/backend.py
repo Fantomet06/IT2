@@ -8,14 +8,13 @@ import requests
 def hent_film_info(imdbID):
     """ Hente informasjon om et film"""
     url = settings.url + "&i=" + imdbID
-    print(url)
     response = requests.get(url)
     if response.status_code == 200:  # sjekker at HTTP request til API gikk bra.
         film_data = response.json()
         if film_data["Response"] == "False":   #sjekker om OMDb API tjeneste kall gikk bra.
             print(film_data["Error"])
             return 
-        return Result(film_data["Title"], film_data["Year"], film_data["Type"])
+        return Result(film_data["Title"], film_data["Year"], film_data["Type"], film_data["imdbID"], film_data["Poster"])
     else:
         print('Feil ved henting av filminformasjon.')
         return None
@@ -39,11 +38,12 @@ def hent_sok(tittel):
         return None
     
 class Result:
-    def __init__(self, title, year, type, imdb_id=None):
+    def __init__(self, title, year, type, imdb_id=None, poster=None):
         self.title = title
         self.year = year
         self.genre = type
         self.imdb_id = imdb_id
+        self.poster = poster
     
     def __str__(self):
         return f"""

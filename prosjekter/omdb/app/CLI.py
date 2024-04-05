@@ -5,6 +5,7 @@ import backend
 
 class App:
     def __init__(self):
+        # spare på siste søk her
         pass
 
     def print_valg(self):
@@ -31,7 +32,7 @@ class App:
                     film_tittel = input('Skriv inn imdb id på filmen: ')
                     film_data = backend.hent_film_info(film_tittel)
                     print(film_data)
-                case "x", "X":
+                case "x":
                     print("Avslutter...")
                     break
                 case _:
