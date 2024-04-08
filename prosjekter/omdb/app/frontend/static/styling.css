@@ -1,0 +1,27 @@
+.splitscreen {
+    float: left;
+    padding: 15px;
+    width: 50%; /* Adjust the width as needed */
+}
+
+.div1 {
+    background: red;
+}
+
+.div2 {
+    background: green;
+}
+
+* {
+    box-sizing: border-box;
+}
+  
+.column {
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center items vertically */
+    padding: 5px;
+}
+
+.text-container {
+    margin-left: 10px; /* Adjust spacing between image and text */
+}

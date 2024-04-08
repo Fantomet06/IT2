@@ -1,0 +1,47 @@
+{# templates/namesearch.html #}
+
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" href="../static/styling.css"/>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <p>Here are the results of your search:</p>
+    <div class="div1 splitscreen">
+        <ul>
+            {% for movie in movies %}
+            <div class="row">
+                <div class="column">
+                    <img src="{{movie.poster}}" alt="Poster">
+                    <div class="text-container">
+                        <li>{{movie.title}}</li>
+                        <li>{{movie.year}}</li>
+                        <li>{{movie.genre}}</li>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+    
+
+    <div class="div2 splitscreen">
+        <ul>
+            {% for serie in series %}
+            <div class="row">
+                <div class="column">
+                    <img src="{{serie.poster}}" alt="Poster">
+                    <div class="text-container">
+                        <li>{{serie.title}}</li>
+                        <li>{{serie.year}}</li>
+                        <li>{{serie.genre}}</li>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+</html>

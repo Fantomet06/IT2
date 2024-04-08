@@ -4,16 +4,15 @@ sys.dont_write_bytecode = True #NO PYCHACHE
 from flask import Flask, request, render_template, redirect, url_for
 import backend
 
-app = Flask(__name__) 
+app = Flask(__name__,template_folder='./frontend/templates',static_folder='./frontend/static') 
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
 	search = request.args.get('query')
 	film_data = backend.hent_sok(search)
-	text = []
-	for film in film_data:
-		text.append(vars(film))
-	return render_template('namesearch.html', title='Filmsøk', data=text)
+	movies = [vars(movie) for movie in film_data[0]]
+	series = [vars(serie) for serie in film_data[1]]
+	return render_template('namesearch.html', title='Filmsøk', movies=movies, series=series)
 
 @app.route('/', methods=['GET', 'POST']) 
 def index(): 
