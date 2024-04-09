@@ -1,0 +1,27 @@
+{# templates/index.html #}
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <link rel="stylesheet" href="../static/styling.css"/>
+	<title>{{data.title}}</title> 
+</head> 
+<body> 
+	<h1>{{data.title}}</h1>
+	<div class="div1 splitscreen">
+        <ul>
+            <div class="row">
+                <div class="column">
+                    <img src="{{data.poster}}" alt="Poster">
+                    <div class="text-container">
+                        <li>Utgivelsesår: {{data.year}}</li>
+                        <li>DVD: {{data.DVD}}</li>
+                        <li>Produksjon: {{data.production}}</li>
+                        <li>Nettside: {{data.website}}</li>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</body> 
+</html>

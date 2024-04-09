@@ -1,0 +1,25 @@
+{# templates/index.html #}
+
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+    <link rel="stylesheet" href="../static/styling.css"/>
+	<title>{{data.title}}</title> 
+</head> 
+<body> 
+	<h1>{{data.title}}</h1>
+	<div class="div2 splitscreen">
+        <ul>
+            <div class="row">
+                <div class="column">
+                    <img src="{{data.poster}}" alt="Poster">
+                    <div class="text-container">
+                        <li>Utgivelsesår: {{data.year}}</li>
+                        <li>Antall sesonger: {{data.total_seasons}}</li>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</body> 
+</html>
