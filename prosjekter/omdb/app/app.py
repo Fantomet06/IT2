@@ -23,7 +23,7 @@ def add_favorite():
 
 @app.route('/favorites', methods=['GET'])
 def favorites():
-	return favorites.__str__()
+	return str(favorites)
 
 @app.route('/result', methods=['GET'])
 def result():
@@ -52,20 +52,20 @@ def details():
 
 @app.route('/', methods=['GET', 'POST']) 
 def index(): 
-	if request.method == 'POST': 
-		# retrieve text from the form
-		namesearch = request.form.get('namesearch')
-		idsearch = request.form.get('idsearch')
+	if request.method == 'GET':
+		return render_template('index.html', title='Filmsøk')
+	
+	# retrieve text from the form
+	namesearch = request.form.get('namesearch')
+	idsearch = request.form.get('idsearch')
 
-		if namesearch:
-			return redirect(url_for('result', query=namesearch))
-		
-		if idsearch:
-			# Print the text in terminal for verification 
-			film_data = backend.hent_film_info(idsearch)
-			return film_data.__str__() + 2*"<br>" + f'<img src="{film_data.poster}" alt="Poster">'
+	if namesearch:
+		return redirect(url_for('result', query=namesearch))
+	
+	if idsearch:
+		return redirect(url_for('details', imdb_id=idsearch))
 
-	return render_template('index.html', title='Filmsøk') 
+	 
 
 
 if __name__ == '__main__': 

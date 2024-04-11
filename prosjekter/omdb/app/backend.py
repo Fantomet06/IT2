@@ -5,12 +5,12 @@ import settings
 import requests
 import requests
 
-def hent_film_info(imdbID):
+def hent_film_info(imdbID) -> object | int:
     """ Hente informasjon om et film"""
     url = settings.url + "&i=" + imdbID
     response = requests.get(url)
     # sjekker at HTTP request til API gikk bra.
-    if response.status_code != 200:
+    if not response.ok:
         print('Feil ved henting av filminformasjon.')
         return 503
 
@@ -22,11 +22,11 @@ def hent_film_info(imdbID):
     
     #hvis alt gikk bra
     if film_data["Type"] == "movie":
-        return Movie(film_data["Title"], film_data["Year"], film_data["imdbID"], film_data["Poster"], film_data["DVD"], film_data["Production"], film_data["Website"], film_data["Type"])
+        return Movie(film_data)
     elif film_data["Type"] == "series":
-        return Series(film_data["Title"], film_data["Year"], film_data["imdbID"], film_data["Poster"], film_data["totalSeasons"], film_data["Type"])
+        return Series(film_data)
     
-def hent_sok(tittel) -> list:
+def hent_sok(tittel) -> list | str:
     """
     Hente alle resultater fra søk
     Returnerer en linked list med filmer og serier
@@ -45,18 +45,18 @@ def hent_sok(tittel) -> list:
     results = [[],[]]
     for film in film_data["Search"]:
         if film["Type"] == "movie":
-            results[0].append(AudiovisueltElement(film["Title"], film["Year"], film["imdbID"], film["Poster"]))
+            results[0].append(AudiovisueltElement(film))
         elif film["Type"] == "series":
-            results[1].append(AudiovisueltElement(film["Title"], film["Year"], film["imdbID"], film["Poster"]))
+            results[1].append(AudiovisueltElement(film))
     return results
     
 class AudiovisueltElement:
-    def __init__(self, title, year, imdb_id, poster, genre=None):
-        self.title = title
-        self.year = year
-        self.imdb_id = imdb_id
-        self.poster = poster
-        self.genre = genre
+    def __init__(self, data: dict[str, str]):
+        self.title = data.get("Title")
+        self.year = data.get("Year")
+        self.imdb_id = data.get("imdbID")
+        self.poster = data.get("Poster")
+        self.genre = data.get("Type")
         #self.id = id
         self.ratings = [] #TODO
 
@@ -70,17 +70,17 @@ class AudiovisueltElement:
 
 class Movie(AudiovisueltElement):
     """ Klasse for å representere en film. """
-    def __init__(self, title, year, imdb_id, poster, DVD, production, website, genre):
-        super().__init__(title, year, imdb_id, poster, genre)
-        self.DVD = DVD
-        self.production = production
-        self.website = website
+    def __init__(self, data: dict[str, str]):
+        super().__init__(data)
+        self.DVD = data.get("DVD")
+        self.production = data.get("Production")
+        self.website = data.get("Website")
 
 class Series(AudiovisueltElement):
     """ Klasse for å representere en serie. """
-    def __init__(self, title, year, imdb_id, poster, total_seasons, genre):
-        super().__init__(title, year, imdb_id, poster, genre)
-        self.total_seasons = total_seasons
+    def __init__(self, data: dict[str, str]):
+        super().__init__(data)
+        self.total_seasons = data.get("totalSeasons")
 
 class Favorites:
     def __init__(self):

@@ -1,5 +1,12 @@
 # Deploy
 
+> First set up /app/settings.py by adding the file and adding the following code
+
+```python
+key="" #your key as a string
+url=f"http://www.omdbapi.com/?apikey={key}"
+```
+
 ## Using docker
 
 1. Install docker - [install docker](https://docs.docker.com/get-docker/)
