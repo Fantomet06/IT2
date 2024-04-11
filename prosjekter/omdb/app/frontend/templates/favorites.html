@@ -6,10 +6,13 @@
     <link rel="stylesheet" href="../static/styling.css"/>
 </head>
 <body>
-    <h1>Favoritter"</h1>
-    <p>Her er favorittene dine!</p>
+    <h1>Favoritter</h1>
+    <h2>Her er favorittene dine!</h2>
+    <div>
+        <a href="/"><button>Nytt søk</button></a>
+    </div>
     <div class="div1 splitscreen">
-        <h3>Filmer</h3>
+        <h2>Filmer</h2>
         <ul>
             {% for movie in movies %}
             <div class="row">
@@ -29,7 +32,7 @@
     
 
     <div class="div2 splitscreen">
-        <h3>Serier</h3>
+        <h2>Serier</h2>
         <ul>
             {% for serie in series %}
             <div class="row">

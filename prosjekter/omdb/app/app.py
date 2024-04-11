@@ -9,21 +9,27 @@ app = Flask(__name__,template_folder='./frontend/templates',static_folder='./fro
 
 @app.route('/favorites/add', methods=['GET', 'POST'])
 def add_favorite():
-	imdb_id = request.args.get('imdb_id', None)
-	display = request.args.get('test')
-	if display == 1: # sjekk om det er en redirect fra details
-		return "HEI"
-	film_data = backend.hent_film_info(imdb_id)
+	imdb_id = request.args.get('imdb_id')
+	redir = request.args.get('redirect')
+	if redir == "1": # sjekk om det er en redirect fra details
+		film_data = last_search
+	else:
+		film_data = backend.hent_film_info(imdb_id)
+
 	if film_data == 503:
 		return "Feil ved henting av filminformasjon."
+
+	if Favorites.in_favorites(film_data):
+		return redirect(url_for('favorites'))
 	
 	# Save to favorites
-	favorites.add_favorite(film_data)
+	Favorites.add_favorite(film_data)
 	return redirect(url_for('favorites'))
 
 @app.route('/favorites', methods=['GET'])
 def favorites():
-	return str(favorites)
+	movies, series = Favorites.get_favorites()
+	return render_template('favorites.html', movies=movies, series=series)
 
 @app.route('/result', methods=['GET'])
 def result():
@@ -69,5 +75,5 @@ def index():
 
 
 if __name__ == '__main__': 
-	favorites = Favorites()
+	Favorites = Favorites()
 	app.run()

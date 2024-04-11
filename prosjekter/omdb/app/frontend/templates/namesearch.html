@@ -7,9 +7,9 @@
 </head>
 <body>
     <h1>Resultater for "{{title}}"</h1>
-    <p>Her er resultatene</p>
+    <h2>Her er resultatene:</h2>
     <div class="div1 splitscreen">
-        <h3>Filmer</h3>
+        <h2>Filmer</h2>
         <ul>
             {% for movie in movies %}
             <div class="row">
@@ -18,7 +18,7 @@
                     <div class="text-container">
                         <li>{{movie.title}}</li>
                         <li>{{movie.year}}</li>
-                        <a href="/details?imdb_id={{movie.imdb_id}}">Mer info</a>
+                        <a href="/details?imdb_id={{movie.imdb_id}}"><button>Mer info</button></a>
                         <br>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
     
 
     <div class="div2 splitscreen">
-        <h3>Serier</h3>
+        <h2>Serier</h2>
         <ul>
             {% for serie in series %}
             <div class="row">
@@ -38,7 +38,7 @@
                     <div class="text-container">
                         <li>{{serie.title}}</li>
                         <li>{{serie.year}}</li>
-                        <a href="/details?imdb_id={{serie.imdb_id}}">Mer info</a>
+                        <a href="/details?imdb_id={{serie.imdb_id}}"><button>Mer info</button></a>
                         <br>
                     </div>
                 </div>

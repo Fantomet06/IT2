@@ -95,8 +95,14 @@ class Favorites:
     def remove_favorite(self, favorite):
         self.favorites.remove(favorite)
 
-    def get_favorites(self):
-        return self.favorites
+    def get_favorites(self) -> list:
+        movies = [vars(movie) for movie in self.favorites[0]]
+        series = [vars(serie) for serie in self.favorites[1]]
+        return movies, series
+    
+    def in_favorites(self, favorite) -> bool:
+        movies, series = self.get_favorites()
+        return vars(favorite) in movies or vars(favorite) in series 
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str([vars(favorite) for favorite in self.favorites])
