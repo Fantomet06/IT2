@@ -26,6 +26,16 @@ def add_favorite():
 	Favorites.add_favorite(film_data)
 	return redirect(url_for('favorites'))
 
+@app.route('/favorites/remove', methods=['GET', 'POST'])
+def remove_favorite():
+	imdb_id = request.args.get('imdb_id')
+	film_data = backend.hent_film_info(imdb_id)
+	if film_data == 503:
+		return "Feil ved henting av filminformasjon."
+
+	Favorites.remove_favorite(film_data)
+	return redirect(url_for('favorites'))
+
 @app.route('/favorites', methods=['GET'])
 def favorites():
 	movies, series = Favorites.get_favorites()

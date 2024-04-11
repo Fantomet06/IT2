@@ -92,8 +92,18 @@ class Favorites:
         else:
             self.favorites[1].append(favorite)
 
-    def remove_favorite(self, favorite):
-        self.favorites.remove(favorite)
+    def remove_favorite(self, remove_favorite) -> str:
+        for fav in self.favorites[0]:
+            if fav.imdb_id == remove_favorite.imdb_id:
+                self.favorites[0].remove(fav)
+                return "Favoritt fjernet."
+        
+        for fav in self.favorites[1]:
+            if fav.imdb_id == remove_favorite.imdb_id:
+                self.favorites[1].remove(fav)
+                return "Favoritt fjernet."
+            
+        return "Ikke en favoritt."
 
     def get_favorites(self) -> list:
         movies = [vars(movie) for movie in self.favorites[0]]
