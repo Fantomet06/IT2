@@ -1,0 +1,53 @@
+@startuml
+
+Class App {
+    - Søk_funksjon
+    - visMeny()
+    - visResultater()
+    - visFavoritter()
+    - leggTilFavoritter()
+    - fjernFavoritter()
+    - sorterFavoritter()
+}
+
+Class AudiovisueltElement{
+    - Title: str
+    - Year: int
+    - imdbID: str
+    - Poster: str
+    - Type: str
+    - poster : str
+    - Ratings: list
+    - visInfo()
+}
+
+Class Movie {
+    - DVD: str
+    - Production: str
+    - Website: str
+}
+
+Class Series {
+    - totalSeasons: int
+}
+Class Favoritter{
+    - Favoritter: list[movies, series]
+    - load()
+    - add()
+    - remove()
+    - get()
+    - visInfo()
+}
+
+Class SokResultat {
+- Title: str
+- Year: int
+- imdbID: str
+}
+
+Movie --|> AudiovisueltElement
+Series --|> AudiovisueltElement
+AudiovisueltElement "0"--*"1" Favoritter
+SokResultat --*"0" App
+Favoritter -"1" App 
+@enduml
