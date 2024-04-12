@@ -1,9 +1,9 @@
 import sys
 sys.dont_write_bytecode = True #NO PYCHACHE
 
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for # type: ignore
 import backend
-from backend import Favorites
+import klasser
 
 app = Flask(__name__,template_folder='./frontend/templates',static_folder='./frontend/static') 
 
@@ -58,12 +58,12 @@ def details():
 		global last_search # Save object in case of add_favorite
 		last_search = film_data # prevent unnecesary API calls
 
-		if film_data.genre == "movie":
+		if film_data.Type == "movie":
 			return render_template('movie.html', data=vars(film_data))
 		else:
 			return render_template('serie.html', data=vars(film_data))
 		
-	except:
+	except Exception as e:
 		return "Feil ved henting av filminformasjon."
 
 @app.route('/', methods=['GET', 'POST']) 
@@ -81,9 +81,6 @@ def index():
 	if idsearch:
 		return redirect(url_for('details', imdb_id=idsearch))
 
-	 
-
-
 if __name__ == '__main__': 
-	Favorites = Favorites()
+	Favorites = klasser.Favorites()
 	app.run()

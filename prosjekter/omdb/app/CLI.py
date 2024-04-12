@@ -2,6 +2,8 @@ import sys
 sys.dont_write_bytecode = True #NO PYCHACHE
 
 import backend
+from klasser import Favorites
+
 
 class App:
     def __init__(self):
@@ -12,6 +14,9 @@ class App:
                 Her kan du søke informasjon om filmer!
                 1. Søk etter en film
                 2. Hent informasjon om en film
+                3. Legg til i favoritter
+                4. Fjern fra favoritter
+                5. Vis favoritter
                 x. Avslutt
             """)
         
@@ -60,7 +65,7 @@ class App:
                     else:
                         valg = input("Skriv inn nr på film/serie:\n> ")
                         film = self.last_search[int(valg)]
-                        print(film)
+                        print(vars(film)) # TODO: add better print
                 
                 # Legge til favoritter
                 case "3":
@@ -73,24 +78,26 @@ class App:
 
                 # Fjerne favoritter
                 case "4":
-                    viste = self.print_favoritter()
+                    viste = self.print_filmer()
 
-                    valg = input("Skriv inn nr på film/serie:\n> ")
-                    Favorites.remove_favorite(viste[int(valg)])
+                    valg = int(input("Skriv inn nr på film/serie:\n> "))
+                    Favorites.remove_favorite(viste[int(valg)]["imdbID"])
                     print("Film/serie fjernet fra favoritter!")
 
                 # Vise favoritter
                 case "5":
-                    self.print_favoritter()
+                    self.print_filmer()
 
                 # Avslutte
                 case "x":
                     print("Avslutter...")
+                    Favorites.load_favorites(True)
                     break
                 case _:
                     print("Ugyldig valg. Prøv igjen.")
 
 if __name__ == "__main__":
-    Favorites = backend.Favorites()
+    Favorites = Favorites()
+    Favorites.load_favorites(False) # Load favorites from file
     app = App()
     app.run()

@@ -1,6 +1,6 @@
 # Deploy
 
-> First set up /app/settings.py by adding the file and adding the following code
+> First set up /app/configs/settings.py by adding the file and adding the following code
 
 ```python
 key="" #your key as a string
@@ -49,5 +49,6 @@ Scripts/Acivate
 
 ```bash
 cd ../app
+pip install -r requirements.txt
 python app.py
 ```

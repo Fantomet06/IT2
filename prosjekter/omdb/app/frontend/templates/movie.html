@@ -4,20 +4,20 @@
 <html lang="en"> 
 <head> 
     <link rel="stylesheet" href="../static/styling.css"/>
-	<title>{{data.title}}</title> 
+	<title>{{data.Title}}</title> 
 </head> 
 <body> 
-	<h1>{{data.title}}</h1>
+	<h1>{{data.Title}}</h1>
 	<div class="div1 splitscreen">
         <ul>
             <div class="row">
                 <div class="column">
-                    <img src="{{data.poster}}" alt="Poster">
+                    <img src="{{data.Poster}}" alt="Poster">
                     <div class="text-container">
-                        <li>Utgivelsesår: {{data.year}}</li>
+                        <li>Utgivelsesår: {{data.Year}}</li>
                         <li>DVD: {{data.DVD}}</li>
-                        <li>Produksjon: {{data.production}}</li>
-                        <li>Nettside: {{data.website}}</li>
+                        <li>Produksjon: {{data.Production}}</li>
+                        <li>Nettside: {{data.Website}}</li>
                         <a href="/favorites/add?redirect=1"><button>Legg til favoritt</button></a>
                         <button onclick="history.back()">Gå tilbake</button>
                     </div>

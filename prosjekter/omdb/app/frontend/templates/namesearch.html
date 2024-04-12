@@ -17,11 +17,11 @@
             {% for movie in movies %}
             <div class="row">
                 <div class="column">
-                    <img src="{{movie.poster}}" alt="Poster">
+                    <img src="{{movie.Poster}}" alt="Poster">
                     <div class="text-container">
-                        <li>{{movie.title}}</li>
-                        <li>{{movie.year}}</li>
-                        <a href="/details?imdb_id={{movie.imdb_id}}"><button>Mer info</button></a>
+                        <li>{{movie.Title}}</li>
+                        <li>{{movie.Year}}</li>
+                        <a href="/details?imdb_id={{movie.imdbID}}"><button>Mer info</button></a>
                         <br>
                     </div>
                 </div>
@@ -37,11 +37,11 @@
             {% for serie in series %}
             <div class="row">
                 <div class="column">
-                    <img src="{{serie.poster}}" alt="Poster">
+                    <img src="{{serie.Poster}}" alt="Poster">
                     <div class="text-container">
-                        <li>{{serie.title}}</li>
-                        <li>{{serie.year}}</li>
-                        <a href="/details?imdb_id={{serie.imdb_id}}"><button>Mer info</button></a>
+                        <li>{{serie.Title}}</li>
+                        <li>{{serie.Year}}</li>
+                        <a href="/details?imdb_id={{serie.imdbID}}"><button>Mer info</button></a>
                         <br>
                     </div>
                 </div>
