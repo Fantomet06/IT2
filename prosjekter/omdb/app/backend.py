@@ -28,7 +28,7 @@ def hent_film_info(imdbID) -> object | int:
     
 def hent_sok(tittel) -> list | str:
     """
-    Hente alle resultater fra søk
+    Henter alle resultater fra søk
     Returnerer en linked list med filmer og serier
     [[Movie], [Series]]
     """
@@ -39,7 +39,7 @@ def hent_sok(tittel) -> list | str:
 
     film_data = response.json()
     if film_data["Response"] == "False":   #sjekker om OMDb API tjeneste kall gikk bra.
-        return film_data["Error"]
+        return 404
     
     #hvis alt gikk bra, så sorterer vi filmer og serier
     results = [[],[]]
@@ -61,12 +61,7 @@ class AudiovisueltElement:
         self.ratings = [] #TODO
 
     def __str__(self) -> str:
-        return f"""
-        Tittel: {self.title}
-        År: {self.year}
-        Type: {self.genre}
-        {'imdbID: ' + self.imdb_id if self.imdb_id else ''}
-        """
+        return f"Tittel: {self.title}, År: {self.year}"
 
 class Movie(AudiovisueltElement):
     """ Klasse for å representere en film. """
@@ -94,12 +89,12 @@ class Favorites:
 
     def remove_favorite(self, remove_favorite) -> str:
         for fav in self.favorites[0]:
-            if fav.imdb_id == remove_favorite.imdb_id:
+            if fav.imdb_id == remove_favorite:
                 self.favorites[0].remove(fav)
                 return "Favoritt fjernet."
         
         for fav in self.favorites[1]:
-            if fav.imdb_id == remove_favorite.imdb_id:
+            if fav.imdb_id == remove_favorite:
                 self.favorites[1].remove(fav)
                 return "Favoritt fjernet."
             

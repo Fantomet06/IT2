@@ -21,7 +21,8 @@
                     <div class="text-container">
                         <li>{{movie.title}}</li>
                         <li>{{movie.year}}</li>
-                        <a href="/details?imdb_id={{movie.imdb_id}}">Mer info</a>
+                        <a href="/details?imdb_id={{movie.imdb_id}}"><button>Mer info</button></a>
+                        <a href="/favorites/remove?imdb_id={{movie.imdb_id}}"><button>Fjern favoritt</button></a>
                         <br>
                     </div>
                 </div>
@@ -41,7 +42,8 @@
                     <div class="text-container">
                         <li>{{serie.title}}</li>
                         <li>{{serie.year}}</li>
-                        <a href="/details?imdb_id={{serie.imdb_id}}">Mer info</a>
+                        <a href="/details?imdb_id={{serie.imdb_id}}"><button>Mer info</button></a>
+                        <a href="/favorites/remove?imdb_id={{serie.imdb_id}}"><button>Fjern favoritt</button></a>
                         <br>
                     </div>
                 </div>

@@ -29,11 +29,7 @@ def add_favorite():
 @app.route('/favorites/remove', methods=['GET', 'POST'])
 def remove_favorite():
 	imdb_id = request.args.get('imdb_id')
-	film_data = backend.hent_film_info(imdb_id)
-	if film_data == 503:
-		return "Feil ved henting av filminformasjon."
-
-	Favorites.remove_favorite(film_data)
+	Favorites.remove_favorite(imdb_id)
 	return redirect(url_for('favorites'))
 
 @app.route('/favorites', methods=['GET'])
@@ -43,28 +39,32 @@ def favorites():
 
 @app.route('/result', methods=['GET'])
 def result():
-	search = request.args.get('query')
-	film_data = backend.hent_sok(search)
-	movies = [vars(movie) for movie in film_data[0]]
-	series = [vars(serie) for serie in film_data[1]]
-	return render_template('namesearch.html', title=search, movies=movies, series=series)
+	try:
+		search = request.args.get('query')
+		film_data = backend.hent_sok(search)
+		
+		movies = [vars(movie) for movie in film_data[0]]
+		series = [vars(serie) for serie in film_data[1]]
+		return render_template('namesearch.html', title=search, movies=movies, series=series)
+	except:
+		return "Ingen film(er) funnet."
 
 @app.route('/details', methods=['GET', 'POST'])
 def details():
-    # Perform any necessary actions here
-    # You can use the button_id to determine which image to display
-	imdb_id = request.args.get('imdb_id')
-	film_data = backend.hent_film_info(imdb_id)
-	if film_data == 503:
-		return "Feil ved henting av filminformasjon."
-	
-	global last_search # Save object in case of add_favorite
-	last_search = film_data # prevent unnecesary API calls
+	try:
+		imdb_id = request.args.get('imdb_id')
+		film_data = backend.hent_film_info(imdb_id)
+		
+		global last_search # Save object in case of add_favorite
+		last_search = film_data # prevent unnecesary API calls
 
-	if film_data.genre == "movie":
-		return render_template('movie.html', data=vars(film_data))
-	else:
-		return render_template('serie.html', data=vars(film_data))
+		if film_data.genre == "movie":
+			return render_template('movie.html', data=vars(film_data))
+		else:
+			return render_template('serie.html', data=vars(film_data))
+		
+	except:
+		return "Feil ved henting av filminformasjon."
 
 @app.route('/', methods=['GET', 'POST']) 
 def index(): 
